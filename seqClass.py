@@ -29,4 +29,4 @@ if args.motif:
     if re.search(args.motif, args.seq):
         print("modified")
     else:
-        print("NOT FOUND")
+        print("modified Not")
