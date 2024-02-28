@@ -1,0 +1,29 @@
+# Start from debian linux image (DockerHub)
+FROM debian:stable
+
+# Add custom label
+LABEL maintainer "AlejandroUribe aluribelo@unal.edu.co" \
+      version "0.1" \
+      description "Script for DNA and RNA analysis"
+
+# Update package lists and install Python and required packages
+FROM python:3.9-slim
+
+# Install Biopython
+RUN pip install biopython==1.81
+
+
+# Make the folder '/scripts' in the container
+RUN mkdir /scripts
+
+# Copy 'seqclass.py' to the folder '/scripts' in the container
+ADD seqclass.py /scripts
+
+# Give execution permissions to seqclass.py
+RUN chmod +x /scripts/seqclass.py
+
+# Add scripts folder to the PATH environment variable
+ENV PATH="$PATH:/scripts"
+     
+# Default command when container starts
+CMD ["/bin/bash"]     
